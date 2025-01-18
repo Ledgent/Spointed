@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Location Recommendation</h1>
+        <form action="/recommend" method="POST">
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name" required><br><br>
+
+            <label for="restaurant_type">Restaurant Type:</label>
+            <select id="restaurant_type" name="restaurant_type" required>
+                <option value="traditional">Traditional</option>
+                <option value="international">International</option>
+            </select><br><br>
+
+            <label for="budget">Budget (₦):</label>
+            <input type="number" id="budget" name="budget" required><br><br>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" value="Kaduna, Nigeria" readonly><br><br>
+
+            <button type="submit">Get Recommendation</button>
+        </form>
+    </div>
+</body>
+</html>

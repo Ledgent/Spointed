@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/x-icon" href="/static/favicon/rblrs.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.loading-screen {
+    height: 100%;
+    background-color: #06402B;
+    text-align: center;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.loading-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+    </style>
+    <title>Spointed Loading...</title>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen d-flex flex-column justify-content-center align-items-center">
+        <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="loading-text mt-3">Please wait while we load your experience...</div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Simulate content loading with a timeout
+function loadContent() {
+    // Simulating content load delay
+    setTimeout(() => {
+        // Redirect to recommendation.html after loading
+        window.location.href = "recommendation.html";
+    }, 3000); // 3000 milliseconds (3 seconds) delay
+}
+
+// When the DOM is fully loaded, execute loadContent
+document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+</body>
+</html>
