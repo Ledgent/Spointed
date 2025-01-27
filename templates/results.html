@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Recommendation Results - RBLRS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #06402B;
+            --secondary: #08ac60;
+            --accent: #FF6B6B;
+            --background: #f8f9fa;
+        }
+
+        body {
+            background: var(--background);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .results-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .results-container {
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(6, 64, 43, 0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .result-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid rgba(6, 64, 43, 0.1);
+            cursor: pointer;
+        }
+
+        .result-details {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .result-details.active {
+            display: block;
+        }
+
+        .map-container {
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .metric-badge {
+            background: rgba(8, 172, 96, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .metric-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .back-button {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            position: fixed;
+            left: 1rem;
+            top: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar-nav {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            height: 100%;
+            width: 300px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .sidebar-nav.active {
+            left: 0;
+        }
+        
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--primary);
+        }
+        
+        .nav-logo {
+            height: 40px;
+        }
+        
+        .close-btn {
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0 1rem;
+        }
+        
+        .nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-links li a:hover {
+            background: rgba(8, 172, 96, 0.05);
+            padding-left: 2.5rem;
+        }
+        
+        .nav-links li i {
+            width: 25px;
+            margin-right: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Back Button Adjustment */
+        .results-header .back-button {
+            left: 4.5rem; /* Adjust if needed */
+        }
+
+        @media (max-width: 768px) {
+            .result-header {
+                padding: 1rem;
+            }
+            
+            .metric-badge {
+                font-size: 0.9rem;
+            }
+            
+            .results-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Hamburger Menu Styles */
+.hamburger-menu {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.sidebar-nav {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.sidebar-nav.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--primary);
+}
+
+.nav-logo {
+    height: 40px;
+}
+
+.close-btn {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 1rem;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.nav-links li a {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover {
+    background: rgba(8, 172, 96, 0.05);
+    padding-left: 2.5rem;
+}
+
+.nav-links li i {
+    width: 25px;
+    margin-right: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Back Button Adjustment */
+.results-header .back-button {
+    left: 4.5rem; /* Adjust if needed */
+}
+    </style>
+
+    <script>
+        // Toggle navigation
+        function toggleNav() {
+            document.getElementById('sidebarNav').classList.toggle('active');
+        }
+    
+        // Close when clicking outside
+        document.addEventListener('click', (event) => {
+            const sidebar = document.getElementById('sidebarNav');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    
+        // Close on ESC key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.getElementById('sidebarNav').classList.remove('active');
+            }
+        });
+    </script>
+
+</head>
+<body>
+    <header class="results-header">
+        <a href="/recommendation" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="text-center">
+            <h1><i class="fas fa-map-marked-alt metric-icon"></i>Recommendation Results</h1>
+            <p>For {{ company_name }}</p>
+        </div>
+    </header>
+
+    <div class="results-container">
+        <!-- Key Metrics Summary -->
+        <div class="stats-grid">
+            <div class="metric-badge">
+                <i class="fas fa-globe metric-icon"></i>
+                {{ country }}
+            </div>
+            <div class="metric-badge">
+                <i class="fas fa-map-marker-alt metric-icon"></i>
+                {{ state }} State
+            </div>
+            <div class="metric-badge">
+                <i class="fas fa-money-bill-wave metric-icon"></i>
+                NGN {{ budget }}
+            </div>
+            <div class="metric-badge">
+                <i class="fas fa-expand metric-icon"></i>
+                {{ business_size }}
+            </div>
+            <div class="metric-badge">
+                <i class="fas fa-utensils metric-icon"></i>
+                {{ restaurant_type }}
+            </div>
+        </div>
+
+        <!-- Recommendation Cards -->
+        {% for location in recommendations %}
+        <div class="result-card">
+            <div class="result-header" onclick="toggleDetails('detail-{{ loop.index }}')">
+                <h3><i class="fas fa-map-pin"></i> {{ location.Location_Name }}</h3>
+                <div class="d-flex flex-wrap">
+                    <span class="badge badge-pill" 
+                          style="background: {% if location.Competition == 'Low' %}#08ac60{% else %}#FF6B6B{% endif %}">
+                        <i class="fas fa-chart-line"></i> {{ location.Competition }} Competition
+                    </span>
+                    <span class="badge badge-pill bg-primary">
+                        <i class="fas fa-walking"></i> {{ location.Foot_Traffic }} Traffic
+                    </span>
+                </div>
+            </div>
+            
+            <div class="result-details" id="detail-{{ loop.index }}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fas fa-layer-group"></i> <strong>Location Type:</strong> {{ location.Location_Type }}</p>
+                        <p><i class="fas fa-wallet"></i> <strong>Monthly Rent:</strong> NGN {{ "{:,.0f}".format(location.Monthly_Rent_NGN) }}</p>
+                        <p><i class="fas fa-users"></i> <strong>Target Audience:</strong> {{ location.Target_Audience }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><i class="fas fa-percent"></i> <strong>Success Probability:</strong> {{ location.Success_Probability }}%</p>
+                        <p><i class="fas fa-lightbulb"></i> <strong>Key Advantage:</strong> {{ location.Key_Advantage }}</p>
+                        <p><i class="fas fa-clipboard-list"></i> <strong>Strategy:</strong> {{ location.Recommended_Strategy }}</p>
+                    </div>
+                </div>
+                
+                <!-- Mini Map for Location -->
+                <div class="map-container" id="map-{{ loop.index }}"></div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Main Interactive Map -->
+        <div class="map-container" id="mainMap"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Toggle detail visibility
+        function toggleDetails(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Initialize main map
+        const mainMap = L.map('mainMap').setView([10.5167, 7.4333], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mainMap);
+
+        // Add markers for each recommendation
+        {% for location in recommendations %}
+        L.marker([{{ location.lat }}, {{ location.lng }}])
+            .addTo(mainMap)
+            .bindPopup(`<b>{{ location.Location_Name }}</b><br>
+                       Rent: NGN {{ "{:,.0f}".format(location.Monthly_Rent_NGN) }}`);
+        {% endfor %}
+
+        // Initialize mini maps for each location
+        {% for location in recommendations %}
+        const map{{ loop.index }} = L.map('map-{{ loop.index }}').setView([{{ location.lat }}, {{ location.lng }}], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map{{ loop.index }});
+        L.marker([{{ location.lat }}, {{ location.lng }}]).addTo(map{{ loop.index }});
+        {% endfor %}
+    </script>
+</body>
+</html>

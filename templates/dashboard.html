@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/rblrs.ico') }}">
+    <title>RBLRS Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #06402B;
+            --secondary-color: #08ac60;
+            --background-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            position: fixed;
+            width: 250px;
+            height: 100%;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle {
+            background: var(--secondary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .recent-recommendations {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .metric-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-left: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #06402B;
+            color: #f4f4f4;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <img src="{{ url_for('static', filename='logos/logo.png') }}" width="50" alt="Logo">
+                <h4 class="ml-2 mb-0">Welcome, {{ full_name }}</h4>
+                <span class="metric-badge">User</span>
+            </div>
+
+            <nav class="nav flex-column mt-4">
+                <a class="nav-link text-white mb-2" href="{{ url_for('home_route.home_page') }}">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('recommendation_route.recommendation_page') }}">
+                    <i class="fas fa-map-marker-alt mr-2"></i> New Recommendation
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('history_route.history_page') }}">
+                    <i class="fas fa-history mr-2"></i> History
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('settings_route.settings_page') }}">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('profile_route.profile_page') }}">
+                    <i class="fas fa-user mr-2"></i> Profile
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('chatter_route.chatter_page') }}">
+                    <i class="fas fa-message mr-2"></i> Chatter
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('updates_route.updates_page') }}">
+                    <i class="fas fa-bell mr-2"></i> Updates
+                </a>
+                <a class="nav-link text-white mb-2" href="{{ url_for('logout_route.logout_page') }}">
+                    <i class="fas fa-sign-out mr-2"></i> Exit
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Quick Access Grid -->
+            <div class="quick-access-grid">
+                <div class="nav-card">
+                    <h5><i class="fas fa-rocket text-primary mr-2"></i>New Recommendation</h5>
+                    <p>Start a new location analysis</p>
+                    <a href="{{ url_for('recommendation_route.recommendation_page') }}" class="btn btn-sm btn-primary">
+                        Start Now
+                    </a>
+                </div>
+
+                <div class="nav-card">
+                    <h5><i class="fas fa-chart-line text-success mr-2"></i>Recent Results</h5>
+                    <p>View your latest recommendations</p>
+                    <a href="#" class="btn btn-sm btn-success">
+                        View Results
+                    </a>
+                </div>
+
+                <div class="nav-card">
+                    <h5><i class="fas fa-cog text-warning mr-2"></i>Account Settings</h5>
+                    <p>Manage your profile and preferences</p>
+                    <a href="#" class="btn btn-sm btn-warning">
+                        Manage Settings
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Recommendations -->
+            <div class="recent-recommendations">
+                <h4 class="mb-4"><i class="fas fa-clock mr-2"></i>Recent Activity</h4>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>Ahmadu Bello Way by Lagos Street</h6>
+                                <small>Recommended for Jackiel Diner</small>
+                            </div>
+                            <span class="text-muted">2 hours ago</span>
+                        </div>
+                    </a>
+                    <!-- Add more activity items -->
+                </div>
+            </div>
+
+            <!-- Chatbot Section -->
+            <div class="chatbot-container">
+                <div class="chatbot-toggle" onclick="toggleChat()">
+                    <i class="fas fa-robot fa-2x"></i>
+                </div>
+                <div class="card chatbot-window" style="display: none; width: 300px; height: 400px;">
+                    <div class="card-header bg-primary text-white">
+                        RBLRS Assistant
+                        <button class="btn btn-sm btn-light float-right" onclick="toggleChat()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="chat-messages mb-3">
+                            <div class="alert alert-info">How can I assists you today?</div>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Type your message...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Chatbot Window
+        function toggleChat() {
+            const chatWindow = document.querySelector('.chatbot-window');
+            chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Initialize Charts
+        const ctx = document.createElement('canvas');
+        // Add chart initialization code here
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 RBLRS. All rights reserved. | Amana Philip Production</p>
+</div>
+
+</body>
+</html>

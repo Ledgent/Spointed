@@ -1,0 +1,37 @@
+name,lat,lng,area,type
+Station Market by Kaduna Junction,10.123456,7.123456,Kaduna,fine_dining
+Force Road by Independence Way,10.234567,7.234567,Kaduna,fine_dining
+Ahmadu Bello Way by Jos Road,10.345678,7.345678,Kaduna,fine_dining
+Ahmadu Bello Way by Alkali Road,10.456789,7.456789,Kaduna,fine_dining
+Lafia Road by Nasarawa,10.56789,7.56789,Kaduna,casual_dining
+Ribadu Road by Tafawa Balewa Way,10.678901,7.678901,Kaduna,casual_dining
+Off Degel Road by Ungwan Rimi,10.789012,7.789012,Kaduna,casual_dining
+Abdulkadir Road by Ungwan Rimi,10.890123,7.890123,Kaduna,casual_dining
+Ahmadu Bello Way by Isah Kaita,10.901234,7.901234,Kaduna,fast_food
+Sultan Road by Nasarawa,10.012345,7.012345,Kaduna,fast_food
+Constitution Road by Independence Way,10.123456,7.123456,Kaduna,fast_food
+Ahmadu Bello Way by Jos Road,10.234567,7.234567,Kaduna,fast_food
+Gombe Road by Ahmadu Bello Way,10.345678,7.345678,Kaduna,cafe
+Ungwan Rimi by Ramat Road,10.456789,7.456789,Kaduna,cafe
+Ahmadu Bello Way by Kakuri,10.56789,7.56789,Kaduna,cafe
+Ahmadu Bello Way by City Centre,10.678901,7.678901,Kaduna,cafe
+Ahmadu Bello Way by Leventis,10.789012,7.789012,Kaduna,buffet
+Aliyu Makama Road by Kaduna Junction,10.890123,7.890123,Kaduna,buffet
+Central Market by Ahmadu Bello Way,10.901234,7.901234,Kaduna,buffet
+Ahmadu Bello Way by Ungwar Sarki,10.012345,7.012345,Kaduna,buffet
+Race Course Road by Murtala Square Stadium,10.123456,7.123456,Kaduna,family_style
+Sokoto Road by City Centre,10.234567,7.234567,Kaduna,family_style
+Ahmadu Bello Way by Taiwo Road,10.345678,7.345678,Kaduna,family_style
+Rigachikun Road by Independence Way,10.456789,7.456789,Kaduna,family_style
+Kanta Road by Ahmadu Bello Way,10.56789,7.56789,Kaduna,ethnic
+Bida Road by Sabon Gari,10.678901,7.678901,Kaduna,ethnic
+Leventis by Ahmadu Bello Way,10.789012,7.789012,Kaduna,ethnic
+Ahmadu Bello Way by Kano Road,10.890123,7.890123,Kaduna,ethnic
+Independence Way by Bida Road,10.901234,7.901234,Kaduna,steakhouse
+Kano Road by Ahmadu Bello Way,10.012345,7.012345,Kaduna,steakhouse
+Sokoto Road by City Centre,10.123456,7.123456,Kaduna,steakhouse
+"Waff Road, off Independence Way",10.234567,7.234567,Kaduna,steakhouse
+Ahmadu Bello Way by Lagos Street,10.345678,7.345678,Kaduna,pizzerias
+Mangal Plaza by Ahmadu Bello Way,10.456789,7.456789,Kaduna,pizzerias
+Kano Road by Ahmadu Bello Way,10.56789,7.56789,Kaduna,pizzerias
+Sokoto Road by City Centre,10.678901,7.678901,Kaduna,pizzerias

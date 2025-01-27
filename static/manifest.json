@@ -1,0 +1,16 @@
+{
+  "name": "Restaurant's Business Location Recommendation System: RBLRS",
+  "short_name": "Spointed",
+  "description": "Location Recommendation System for Restaurant's Business",
+  "icons": [
+    {
+      "src": "/static/favicon/rblrs.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06402B",
+  "theme_color": "#06402B"
+}

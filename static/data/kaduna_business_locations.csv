@@ -1,0 +1,41 @@
+Location_Name,Location_Type,Foot_Traffic,Affordability,Competition,Landmark,Restaurant_Type,Budget,Business_Size,State,Category
+Ahmadu Bello Way,Commercial,High,High,High,Ahmadu Bello Stadium,Intercontinental,5M-10M,Large,Kaduna,Prime Commercial Zone
+Ungwan Rimi,Residential,Medium,Low,Low,Ungwan Rimi Market,Traditional,500k-2M,Small,Kaduna,Residential Cluster
+Kasuwan Barchi Market,Market,High,Medium,High,Kasuwan Barchi Plaza,Traditional,2M-5M,Medium,Kaduna,Market Hub
+Murtala Mohammed Square,Landmark,High,Medium,Low,Murtala Square Monument,Intercontinental,10M+,Large,Kaduna,Landmark Premium Zone
+Kawo Motor Park,Transport Hub,High,Low,Medium,Kawo Bus Terminal,Traditional,1M-3M,Small,Kaduna,Transport Corridor
+Kabala Costain,Commercial,High,High,High,Kabala Roundabout,Intercontinental,7M-12M,Large,Kaduna,Upscale Dining District
+Ungwan Sarki,Residential,Medium,Medium,Low,Ungwan Sarki Mosque,Traditional,1.5M-4M,Medium,Kaduna,Affordable Residential Zone
+Sabon Gari,Historic District,Medium,Medium,Medium,Sabon Gari Railway Station,Traditional,3M-6M,Medium,Kaduna,Cultural Heritage Area
+New Millennium City,Emerging Zone,Low,High,Low,Millennium Tower,Intercontinental,8M-15M,Large,Kaduna,Emerging Business Hub
+Central Market,Market,High,Low,High,Central Market Clock Tower,Traditional,500k-1.5M,Small,Kaduna,Local Market Zone
+Malali Junction,Residential,Medium,Medium,Low,Malali Primary School,Traditional,1M-3M,Small,Kaduna,Suburban Cluster
+Independence Way,Commercial,High,High,High,Independence Plaza,Intercontinental,6M-9M,Medium,Kaduna,High-Traffic Commercial Strip
+Kakuri Road,Emerging Zone,Medium,Medium,Medium,Kakuri Market,Traditional,2M-4M,Medium,Kaduna,Developing Commercial Area
+Gabasawa Market,Market,High,Low,High,Gabasawa Plaza,Traditional,1.5M-3M,Small,Kaduna,Neighborhood Market
+Leventis Roundabout,Transport Hub,High,Low,High,Leventis Building,Intercontinental,5M-8M,Medium,Kaduna,Strategic Intersection
+Tafawa Balewa Way,Commercial,Medium,High,Medium,Tafawa Balewa Library,Intercontinental,4M-7M,Medium,Kaduna,Mid-Range Commercial Corridor
+Sultan Road,Commercial,High,High,High,Sultan Bello Mosque,Intercontinental,7M-11M,Large,Kaduna,Prestige Business Zone
+Rigachikun Road,Emerging Zone,Medium,Medium,Low,Rigachikun Hills,Traditional,2M-5M,Medium,Kaduna,Suburban Growth Area
+Ungwan Dosa,Residential,Low,Low,Low,Dosa Primary School,Traditional,800k-1.8M,Small,Kaduna,Low-Density Residential
+Barnawa Junction,Commercial,Medium,High,Medium,Barnawa Shopping Complex,Intercontinental,4M-6M,Medium,Kaduna,Mixed-Use Development
+Kaduna North Secretariat,Government,Low,High,Low,Secretariat Building,Traditional,3M-5M,Medium,Kaduna,Government Institutional Zone
+Lagos Street,Commercial,High,High,High,Lagos Street Plaza,Intercontinental,8M-12M,Large,Kaduna,High-End Commercial Cluster
+Kanta Road,Residential,Medium,Low,Low,Kanta Primary School,Traditional,1.2M-2.5M,Small,Kaduna,Urban Residential
+Ungwan Sanusi,Residential,Low,Low,Low,Sanusi Mosque,Traditional,700k-1.5M,Small,Kaduna,Low-Income Residential
+Hayin Banki,Residential,Medium,Medium,Low,Banki Market,Traditional,1.5M-3M,Small,Kaduna,Transitional Residential Zone
+Ungwan Kanawa,Residential,Low,Low,Low,Kanawa Health Centre,Traditional,900k-1.7M,Small,Kaduna,Peri-Urban Area
+Gombe Road,Commercial,Medium,High,Medium,Gombe Road Plaza,Intercontinental,5M-8M,Medium,Kaduna,Secondary Commercial Strip
+Sokoto Road,Commercial,High,High,High,Sokoto Roundabout,Intercontinental,6M-10M,Large,Kaduna,Established Business District
+Alkali Road,Residential,Medium,Medium,Medium,Alkali Primary School,Traditional,2M-4M,Medium,Kaduna,Moderate-Density Residential
+Ungwan Yamma,Residential,Low,Low,Low,Yamma Market,Traditional,800k-1.6M,Small,Kaduna,Outlying Residential
+Federal Medical Centre,Landmark,Medium,High,Low,FMC Kaduna,Intercontinental,3M-5M,Medium,Kaduna,Healthcare Institutional Zone
+Kaduna River Bridge,Landmark,Medium,Medium,Low,River Bridge View,Traditional,2M-3.5M,Small,Kaduna,Riverside Zone
+NDA Polo Club,Landmark,Low,High,Low,Polo Club Arena,Intercontinental,10M+,Large,Kaduna,Elite Recreational Zone
+Ranchers Bees Stadium,Landmark,High,High,High,Ranchers Stadium,Intercontinental,8M-15M,Large,Kaduna,Sports & Entertainment Hub
+Kaduna International Trade Fair Complex,Landmark,High,High,High,Trade Fair Arena,Intercontinental,12M+,Large,Kaduna,Event-Driven Commercial Zone
+Badarawa Market,Market,High,Low,High,Badarawa Plaza,Traditional,1.2M-2.8M,Small,Kaduna,Community Market
+Ungwan Yero,Residential,Low,Low,Low,Yero Health Centre,Traditional,600k-1.2M,Small,Kaduna,Low-Cost Residential
+Millennium Estate,Emerging Zone,Low,High,Low,Millennium Park,Intercontinental,9M-14M,Large,Kaduna,Planned Community
+Barau Dikko Extension,Residential,Medium,Medium,Medium,Barau Dikko Hospital,Traditional,2.5M-4.5M,Medium,Kaduna,Suburban Expansion Area
+Nassarawa GRA,Residential,High,High,Low,Nassarawa Golf Club,Intercontinental,6M-10M,Large,Kaduna,Exclusive Residential Enclave

@@ -1,0 +1,39 @@
+# Core System
+Flask==3.0.0
+flask-cors==4.0.0
+pandas>=2.2.0
+numpy>=1.26.4
+scikit-learn>=1.3.2
+lightgbm>=4.1.0
+xgboost>=2.0.0
+joblib>=1.3.2
+
+# Database & Session Management
+SQLAlchemy>=2.0.23
+psycopg2-binary>=2.9.9  # PostgreSQL adapter
+redis>=5.0.1            # For session caching
+Flask-Session>=0.5.0    # Server-side sessions
+alembic>=1.13.1         # Database migrations
+
+# Real-Time Features
+Flask-SocketIO>=5.3.6   # WebSocket support
+python-socketio>=5.11.2
+eventlet>=0.35.0        # Async server
+
+# API & Frontend
+Flask-RESTX>=1.3.0      # API endpoints
+Jinja2>=3.1.3           # Templating
+Flask-Assets>=2.0       # Frontend resource management
+libsass>=0.22.0         # CSS preprocessing
+
+# User Personalization
+imbalanced-learn>=0.11.0  # For specialized ML
+surprise>=0.1            # Recommendation systems
+hmmlearn>=0.3.0          # Behavior pattern analysis
+
+# Security
+bcrypt>=4.1.2           # Password hashing
+Flask-Talisman>=1.0.0   # HTTPS/security headers
+
+# Monitoring
+Flask-Profiler>=1.8     # Performance tracking

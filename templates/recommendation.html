@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/rblrs.ico') }}">
+    <title>RBLRS: Restaurant's Business Location Recommendation System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #06402B;
+            --secondary-color: #08ac60;
+            --background-color: #f4f4f4;
+        }
+
+        .input-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            padding-left: 40px;
+            height: 45px;
+            border: 2px solid rgba(6, 64, 43, 0.2);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(8, 172, 96, 0.15);
+        }
+
+        .budget-range {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .budget-option {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid rgba(6, 64, 43, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .budget-option.active {
+            border-color: var(--primary-color);
+            background: rgba(8, 172, 96, 0.05);
+        }
+
+        .form-section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="{{ url_for('static', filename='logos/logo.png') }}" alt="RBLRS Logo" height="50" width="50" loading="lazy">
+            <h1>RBLRS: Restaurant's Business Location Recommendation System</h1>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+        <div class="input-section">
+            <h2 class="form-section-title"><i class="fas fa-building mr-2"></i>Business Profile</h2>
+            
+            <form id="recommendationForm" method="POST" action="{{ url_for('recommend.recommend_location') }}">
+                <div class="form-group">
+                    <label for="company_name">Company Name</label>
+                    <div class="position-relative">
+                        <i class="fas fa-store input-icon"></i>
+                        <input type="text" id="company_name" name="company_name" 
+                               class="form-control" placeholder="Enter your business name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="restaurant_type">Restaurant Type</label>
+                            <div class="position-relative">
+                                <i class="fas fa-utensils input-icon"></i>
+                                <select id="restaurant_type" name="restaurant_type" class="form-control" required>
+                                    <option value="" disabled selected>Select type</option>
+                                    <option value="Intercontinental">Intercontinental</option>
+                                    <option value="Traditional">Traditional</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="business_size">Business Size</label>
+                            <div class="position-relative">
+                                <i class="fas fa-expand input-icon"></i>
+                                <select id="business_size" name="business_size" class="form-control" required>
+                                    <option value="" disabled selected>Select size</option>
+                                    <option value="Small">Small (1-10 employees)</option>
+                                    <option value="Medium">Medium (11-50 employees)</option>
+                                    <option value="Large">Large (50+ employees)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="form-section-title mt-5"><i class="fas fa-map-marker-alt mr-2"></i>Location Preferences</h2>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="location_type">Preferred Location Type</label>
+                            <select id="location_type" name="location_type" class="form-control" required>
+                                <option value="" disabled selected>Select location type</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Residential">Residential</option>
+                                <option value="Market">Market</option>
+                                <option value="Transport Hub">Transport Hub</option>
+                                <option value="Landmark">Landmark</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="competition">Preferred Competition Level</label>
+                            <select id="competition" name="competition" class="form-control" required>
+                                <option value="" disabled selected>Select competition level</option>
+                                <option value="Low">Low Competition</option>
+                                <option value="Medium">Medium Competition</option>
+                                <option value="High">High Competition</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Budget Range (Monthly Rent)</label>
+                    <div class="budget-range">
+                        <div class="budget-option" data-value="500k-2M">NGN 500K - 2M</div>
+                        <div class="budget-option" data-value="2M-5M">NGN 2M - 5M</div>
+                        <div class="budget-option" data-value="5M-10M">NGN 5M - 10M</div>
+                        <div class="budget-option" data-value="10M+">NGN 10M+</div>
+                    </div>
+                    <input type="hidden" id="budget" name="budget" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferred_features">Preferred Features</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="high_traffic" name="features" value="High Traffic">
+                                <label class="custom-control-label" for="high_traffic">High Foot Traffic</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="parking" name="features" value="Parking Available">
+                                <label class="custom-control-label" for="parking">Parking Available</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="delivery" name="features" value="Delivery Zone">
+                                <label class="custom-control-label" for="delivery">Delivery Zone</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!-- Add this in the form section -->
+<div class="form-group">
+    <label for="country">Country</label>
+    <div class="position-relative">
+        <i class="fas fa-globe-africa input-icon"></i>
+        <select id="country" name="country" class="form-control" required>
+            <option value="" disabled selected>Select country</option>
+            <option value="Nigeria" selected>Nigeria</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Kenya">Kenya</option>
+            <option value="South Africa">South Africa</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="state">State</label>
+    <div class="position-relative">
+        <i class="fas fa-map-marker-alt input-icon"></i>
+        <select id="state" name="state" class="form-control" required disabled>
+            <option value="" disabled selected>Select state</option>
+            <!-- States will be dynamically populated -->
+        </select>
+    </div>
+</div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-search-location mr-2"></i>Find Optimal Locations
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Budget Range Selection
+        document.querySelectorAll('.budget-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.budget-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('budget').value = this.dataset.value;
+            });
+        });
+
+        // Form Validation
+        document.getElementById('recommendationForm').addEventListener('submit', function(e) {
+            if (!document.getElementById('budget').value) {
+                alert('Please select a budget range');
+                e.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        // Country-State data
+        const countryStates = {
+            'Nigeria': [
+                'Kaduna', 'Lagos', 'Abuja', 'Kano', 'Rivers', 
+                'Oyo', 'Edo', 'Enugu', 'Plateau', 'Sokoto'
+            ],
+            'Ghana': ['Greater Accra', 'Ashanti', 'Western', 'Eastern'],
+            'Kenya': ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru'],
+            'South Africa': ['Gauteng', 'Western Cape', 'KwaZulu-Natal']
+        };
+    
+        // Initialize with Nigeria as default
+        document.addEventListener('DOMContentLoaded', () => {
+            const countrySelect = document.getElementById('country');
+            const stateSelect = document.getElementById('state');
+            
+            // Initialize Nigeria states
+            populateStates('Nigeria');
+            stateSelect.disabled = false;
+    
+            // Country change handler
+            countrySelect.addEventListener('change', function() {
+                stateSelect.disabled = false;
+                populateStates(this.value);
+            });
+        });
+    
+        function populateStates(country) {
+            const stateSelect = document.getElementById('state');
+            stateSelect.innerHTML = '<option value="" disabled selected>Select state</option>';
+            
+            countryStates[country].forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                // Set Kaduna as first option for Nigeria
+                if (country === 'Nigeria' && state === 'Kaduna') {
+                    option.selected = true;
+                }
+                stateSelect.appendChild(option);
+            });
+        }
+    </script>
+</body>
+</html>
